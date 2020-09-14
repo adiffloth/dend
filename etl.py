@@ -1,43 +1,43 @@
 import os
 import glob
 import psycopg2
-import pandas as pd
-from sql_queries import *
+# import pandas as pd
+from sql_queries import time_table_insert, song_table_insert, artist_table_insert, user_table_insert, song_select, songplay_table_insert
 
 
 def process_song_file(cur, filepath):
     # open song file
-    df = 
+    df = None
 
     # insert song record
-    song_data = 
+    song_data = None
     cur.execute(song_table_insert, song_data)
-    
+
     # insert artist record
-    artist_data = 
+    artist_data = None
     cur.execute(artist_table_insert, artist_data)
 
 
 def process_log_file(cur, filepath):
     # open log file
-    df = 
+    df = None
 
     # filter by NextSong action
-    df = 
+    df = None
 
     # convert timestamp column to datetime
-    t = 
-    
+    t = None
+
     # insert time data records
-    time_data = 
-    column_labels = 
-    time_df = 
+    time_data = None
+    column_labels = None
+    time_df = None
 
     for i, row in time_df.iterrows():
         cur.execute(time_table_insert, list(row))
 
     # load user table
-    user_df = 
+    user_df = None
 
     # insert user records
     for i, row in user_df.iterrows():
@@ -45,13 +45,13 @@ def process_log_file(cur, filepath):
 
     # insert songplay records
     for index, row in df.iterrows():
-        
+
         # get songid and artistid from song and artist tables
         results = cur.execute(song_select, (row.song, row.artist, row.length))
         songid, artistid = results if results else None, None
 
         # insert songplay record
-        songplay_data = 
+        songplay_data = None
         cur.execute(songplay_table_insert, songplay_data)
 
 
@@ -59,8 +59,8 @@ def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
-        files = glob.glob(os.path.join(root,'*.json'))
-        for f in files :
+        files = glob.glob(os.path.join(root, '*.json'))
+        for f in files:
             all_files.append(os.path.abspath(f))
 
     # get total number of files found
